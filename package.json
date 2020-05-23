@@ -1,0 +1,24 @@
+{
+  "name": "discordnootbot",
+  "version": "1.0.0",
+  "description": "Gotta honor my name.",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/N0ot-No0t/DiscordNootBot.git"
+  },
+  "author": "N0ot-No0t",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/N0ot-No0t/DiscordNootBot/issues"
+  },
+  "homepage": "https://github.com/N0ot-No0t/DiscordNootBot#readme"
+}
