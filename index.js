@@ -11,6 +11,8 @@ const prefix = "!";
 
 var isReady = true;
 
+var specialRole = "NootPass"
+
 //note: noot3 is bass boost and noot8 is glitch noot
 
 bot.on("ready", () => {
@@ -32,32 +34,46 @@ bot.on("message", async msg => {
 
         case "noot":
 
-            if (msg.member.voice.channel) {
 
-                var voiceChannel = msg.member.voice.channel;
+            if (args[1] == "glitch" && msg.member.roles.cache.some(role => role.name === specialRole)) {
 
-                await voiceChannel.join().then(connection => {
+                playSpecifiAudio(10, msg);
 
-                    var dispatcher = connection.play("./assets/audio/noot" + getRandomAudioID() + ".mp3");
+            } else if (args[1] == "loud" && msg.member.roles.cache.some(role => role.name === specialRole)) {
 
-                    //console.log("Playing noot" + getRandomAudioID());
-
-                    dispatcher.on('finish', () => {
-                        console.log("Finished playing.")
-                        //connection.disconnect();
-                        voiceChannel.leave();
-                        //dispatcher.pause();
-                    });
-
-                    console.log("Left Channel");
-
-                }).catch(err => console.log(err));
+                playSpecifiAudio(11, msg);
 
             } else {
-                msg.reply('NOOT NOOT!');
-            }
 
-            isReady = true;
+
+                if (msg.member.voice.channel) {
+
+                    var voiceChannel = msg.member.voice.channel;
+
+                    await voiceChannel.join().then(connection => {
+
+                        var dispatcher = connection.play("./assets/audio/noot" + getRandomAudioID() + ".mp3");
+
+                        //console.log("Playing noot" + getRandomAudioID());
+
+                        dispatcher.on('finish', () => {
+                            console.log("Finished playing.")
+                            //connection.disconnect();
+                            voiceChannel.leave();
+                            //dispatcher.pause();
+                        });
+
+                        console.log("Left Channel");
+
+                    }).catch(err => console.log(err));
+
+                } else {
+                    msg.reply('NOOT NOOT!');
+                }
+
+                isReady = true;
+
+            }
 
     }
     //}
@@ -74,9 +90,37 @@ bot.on("message", async msg => {
 
 function getRandomAudioID() {
 
-    var index = (Math.floor(Math.random() * 10) + 1);
+    var index = (Math.floor(Math.random() * 8) + 1);
 
     console.log("index: " + index);
 
     return index;
+}
+
+async function playSpecifiAudio(index, msg) {
+
+    if (msg.member.voice.channel) {
+
+        var voiceChannel = msg.member.voice.channel;
+
+        await voiceChannel.join().then(connection => {
+
+            var dispatcher = connection.play("./assets/audio/noot" + index + ".mp3");
+
+            dispatcher.on('finish', () => {
+                console.log("Finished playing.")
+                //connection.disconnect();
+                voiceChannel.leave();
+                //dispatcher.pause();
+            });
+
+            console.log("Left Channel");
+
+        }).catch(err => console.log(err));
+
+    } else {
+        msg.reply('NOOT NOOT!');
+    }
+
+    isReady = true;
 }
