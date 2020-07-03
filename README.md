@@ -2,7 +2,7 @@
 
 This bot allows the user to summon Pingu in a Discord voice chat and yell a "noot".
 
-##Usage
+## Usage
 
 use `!noot` to call the but with a random noot voiceline
 
