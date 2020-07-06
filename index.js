@@ -1,5 +1,7 @@
 require('dotenv').config()
 
+app.listen(process.env.PORT || 5000)
+
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
